@@ -1,0 +1,118 @@
+%%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a template file for the global option of the SVJour class
+%
+% Copy it to a new file with a new name and use it as the basis
+% for your article
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% First comes an example EPS file -- just ignore it and
+% proceed on the \documentclass line
+\begin{filecontents*}{example.eps}
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox: 19 19 221 221
+%%CreationDate: Mon Sep 29 1997
+%%Creator: programmed by hand (JK)
+%%EndComments
+gsave
+newpath
+  20 20 moveto
+  20 220 lineto
+  220 220 lineto
+  220 20 lineto
+closepath
+2 setlinewidth
+gsave
+  .4 setgray fill
+grestore
+stroke
+grestore
+\end{filecontents*}
+%
+% Choose either the first of the next two \documentclass lines for one
+% column journals or the second for two column journals.
+%\documentclass[global,referee]{svjour}
+\documentclass[global,twocolumn]{svjour}
+%\documentclass[global,twocolumn]{svjour}
+% Remove option referee for final version
+
+\usepackage{graphicx}
+\usepackage{epsfig}
+
+\usepackage{graphics}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{pslatex}
+\usepackage{subtable}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage{./styles/lstlang0}
+\usepackage{./styles/lstAlloy}
+
+
+% Insert the name of "your" journal with the command below:
+\journalname{Software and System Modeling}
+
+\begin{document}
+\input{macro}
+%\title{Automatic Model Generation to Test Transformations}
+\title{Automatic Test Model Generation to Transformation Pre-condition Refinement}
+%\subtitle{A Symbiotic Methodology To Validate Model Transformations}
+
+
+\author{Sagar Sen \and Jean-Marie Mottu \and Juan Cadavid \and Benoit Baudry 
+% \thanks{\emph{Present address:} Insert the address here if needed}%
+}
+
+%
+%\offprints{}          % Insert a name or remove this line
+%
+
+\author{Sagar Sen, Jean-Marie Mottu, Juan Cadavid, Benoit Baudry}
+
+\institute{
+	ATLANMOD, Ecole des Mines, 44000 Nantes, France\\
+	\email{sagar.sen@mines-nantes.fr} \\
+	Universit\'e de Nantes (IUT de Nantes / LINA - UMR CNRS 6241), \\
+	3 rue du Mar\'{e}chal Joffre - 44000 Nantes\\
+	\email{jean-marie.mottu@univ-nantes.fr} \\
+    INRIA Rennes - Bretagne Atlantique / IRISA, Universit\'{e} Rennes 1,\\
+    Triskell Team, Campus de Beaulieu, 35042 Rennes Cedex, France\\
+    \email{\{jcadavid, bbaudry\}@irisa.fr} }
+	
+
+
+
+\date{Received: date / Revised version: date}
+% The correct dates will be entered by the editor
+%
+\maketitle
+%
+
+\input{Abstract.tex}
+\input{Introduction.tex}
+\input{ProblemDescription.tex}
+\input{Foundations.tex}
+\input{Methodology.tex}
+\input{Experiments.tex}
+\input{RelatedWork.tex}
+\input{Conclusion.tex}
+
+%
+% BibTeX users please use
+% \bibliographystyle{}
+% \bibliography{}
+\appendix
+\input{Appendix.tex}
+
+\bibliographystyle{splncs}
+\bibliography{Prop-SoSym}
+
+
+\end{document}
+
+% end of file template.tex
+

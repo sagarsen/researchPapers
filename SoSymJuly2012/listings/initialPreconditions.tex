@@ -1,0 +1,33 @@
+
+/*Initial Model Transformation Pre-conditions*/
+
+
+fact atleastOnePrimaryAttribute 
+{
+	all c:Class | one a:c.attrs | a.is_primary =True
+}
+
+fact no4CyclicClassAttribute
+{
+	all a:Attribute | a.type in Class implies all a1:a.type.attrs | a1.type in 
+	Class implies all a2:a.type.attrs | a2.type in Class implies all a3:a.type.attrs|a3.type
+	 in Class implies all a4:a.type.attrs | a4.type in PrimitiveDataType
+}
+
+fact noAttributeAndAssociationHaveSameName
+{
+	all c:Class , assoc :Association | 
+	all a:c.attrs | (assoc.src = c) implies a.name != assoc.name
+}
+
+fact no1CycleNonPersistent 
+{
+all a: Association | (a.dest = a.src) implies a.src.is_persistent = True 
+}
+
+fact no2CycleNonPersistent
+{
+	all a1: Association, a2:Association |
+	(a1.dest = a2.src and a2.dest = a1.src) implies 
+	a1.src.is_persistent = True or a2.src.is_persistent=True
+}

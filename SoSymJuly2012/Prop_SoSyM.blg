@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Prop_SoSyM.aux
+The style file: splncs.bst
+Database file #1: Prop-SoSym.bib
+Warning--can't use both volume and number fields in anastasakis2009
+Warning--empty booktitle in alloy
+You've used 30 entries,
+            2087 wiz_defined-function locations,
+            657 strings with 8746 characters,
+and the built_in function-call counts, 7813 in all, are:
+= -- 766
+> -- 294
+< -- 13
++ -- 111
+- -- 81
+* -- 482
+:= -- 1059
+add.period$ -- 39
+call.type$ -- 30
+change.case$ -- 27
+chr.to.int$ -- 0
+cite$ -- 32
+duplicate$ -- 442
+empty$ -- 864
+format.name$ -- 81
+if$ -- 1961
+int.to.chr$ -- 0
+int.to.str$ -- 30
+missing$ -- 31
+newline$ -- 152
+num.names$ -- 30
+pop$ -- 166
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 244
+stack$ -- 0
+substring$ -- 286
+swap$ -- 157
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 2
+while$ -- 54
+width$ -- 32
+write$ -- 333
+(There were 2 warnings)

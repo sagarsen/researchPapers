@@ -1,0 +1,75 @@
+%% This is subtable.sty := subfig.sty with the substitution
+%% [F f]igure --> [T t]able throughout (including the documentation)
+%%     - modification by rags@Math.McGill.Ca
+%%% ======================================================================
+%%%  @LaTeX-style-file{
+%%%     filename        = "subfig.sty",
+%%%     version         = "1.2",
+%%%     date            = "28 January 1992",
+%%%     time            = "15:32:11.25 EST",
+%%%     author          = "Mauro Orlandini",
+%%%     address         = "NASA/Goddard Space Flight Center - Code 666.0
+%%%                        Laboratory for High Energy Astrophysics
+%%%                        Greenbelt, MD 20771 - USA",
+%%%     Email          =  "orlandini@lheavx.gsfc.nasa.gov (Internet)
+%%%                        orlandini@lheavx.span.nasa.gov (Bitnet)
+%%%                        15426::ORLANDINI (DECnet)",
+%%%     telephone       = "(301) 286-1128",
+%%%     FAX             = "(301) 286-9240",
+%%%     supported       = "yes",
+%%%     keywords        = "LaTeX, floats, tables",
+%%%     abstract        = "This LaTeX style automatically redefines the
+%%%                        table number as 2a, 2b, etc, by means of a
+%%%                        subtable environment. Note that this style
+%%%                        changes ONLY the table number.",
+%%%     codetable       = "ISO/ASCII",
+%%%     checksum        = "02721 70 314 3644",
+%%%     docstring       = "Use: If you have already 3 (floats) tables in
+%%%                        your LaTeX file, then the commands
+%%%                           \begin{subtable}
+%%%                           \vspace{8cm} 
+%%%                           \special{file.ps}
+%%%                           \caption[Short Caption]{Long caption.}
+%%%                           \label{ThisIsASubtable}
+%%%                           \end{subtable}
+%%%                        will create Table 4a. A reference to
+%%%                        \label{ThisIsASubtable} will generate the correct
+%%%                           Table~\ref{ThisIsASubtable}  ===>  Table~4a
+%%%                        If the next table is another subtable, it will
+%%%                        labeled as 4b, otherwise as 5.
+%%%                                                
+%%%  30-JAN-1992 (MO): Added the subtable* environment.
+%%%  14-APR-1992 (MO): There is a bug in the case you have two subtable
+%%%                    environments following each other (as 1a, 1b, 2a, 2b).
+%%%                    In this case you have to restore the counters manually
+%%%                      \stepcounter{table}\setcounter{subtable}{0}
+%%%                        
+%%%                        The checksum field above contains a CRC-16
+%%%                        checksum as the first value, followed by the
+%%%                        equivalent of the standard UNIX wc (word 
+%%%                        count) utility output of lines, words, and
+%%%                        characters.  This is produced by Robert 
+%%%                        Solovay's checksum utility."
+%%% }
+%%% ======================================================================
+\newif\ifsub@@table   \sub@@tabletrue
+\newcounter{subtable}[table]
+\def\thesubtable{\@arabic\c@table\alph{subtable}}
+\def\fps@subtable{tbp}
+\def\ftype@subtable{1}
+\def\ext@subtable{lof}
+\def\fnum@subtable{Table \thesubtable}
+\def\subtable{\ifsub@@table\global\sub@@tablefalse\stepcounter{table}\fi%
+ \@float{subtable}}
+\let\endsubtable\end@float
+\@namedef{subtable*}{\ifsub@@table\global\sub@@tablefalse%
+ \stepcounter{table}\fi \@dblfloat{subtable}}
+\@namedef{endsubtable*}{\end@dblfloat}
+
+\def\endtable{\global\sub@@tabletrue\end@float}
+\@namedef{endtable*}{\global\sub@@tabletrue\end@dblfloat}
+
+\endinput
+%%% End: subfig.sty
+
+

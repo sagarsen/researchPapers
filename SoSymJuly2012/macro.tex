@@ -1,0 +1,109 @@
+\makeatletter
+
+
+\newcommand{\nm@basicalert}[2]{\fbox{\bfseries\sffamily\scriptsize#1}{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}   }
+
+\newcommand{\Naouel}[1]{\nm@basicalert{Naouel}{#1}}
+\newcommand{\Cyril}[1]{\nm@basicalert{Cyril}{#1}}
+\newcommand{\Sagar}[1]{\nm@basicalert{Sagar}{#1}}
+\newcommand{\Olivier}[1]{\nm@basicalert{Olivier}{#1}}
+
+\newcommand{\ie}{\textit{i.e.},}
+\newcommand{\eg}{\textit{e.g.},}
+\newcommand{\OCL}{\textsf{OCL}}
+
+\newcommand{\nm@product}[1]{\textsc{#1}}
+\newcommand{\nm@code}[1]{{\texttt{#1}}}
+\newcommand{\nm@pattern}[1]{{\textsf{#1}}}
+	\newcommand{\textGG}{\textsf{Graph Grammar}}
+	\newcommand{\GG}{\textsf{GG}}
+	\newcommand{\DCSP}{\textsf{DCSP}}
+	\newcommand{\Graph}{\textsf{Graph}}
+	\newcommand{\HFSM}{\textsf{HFSM}}
+	\newcommand{\textHFSM}{\textsf{Hierarchical Finite State Machine}}
+	\newcommand{\BNF}{\textsf{BNF}}
+	\newcommand{\textBNF}{\textsf{Backus-Naur Form}}
+	\newcommand{\textUMLCD}{\textsf{Unified Modelling Language Class Diagram}}
+	\newcommand{\textUML}{\textsf{Unified Modelling Language}}
+	\newcommand{\Prolog}{\textsf{Prolog}}
+	\newcommand{\UMLCD}{\textsf{UMLCD}}
+	\newcommand{\UML}{\textsf{UML}}
+	\newcommand{\textOCL}{\textsf{Object Constraint Language}}
+	\newcommand{\EMOF}{\textsf{EMOF}}
+	\newcommand{\MOF}{\textsf{MOF}}
+	\newcommand{\textMOF}{\textsf{Meta-object Facility}}
+	\newcommand{\textEMOF}{\textsf{Essential Meta-object Facility}}
+	\newcommand{\MDE}{MDE}
+	\newcommand{\OMG}{\textsf{OMG}}
+	\newcommand{\textOMG}{\textsf{Object Management Group}}
+	\newcommand{\textMDE}{\emph{Model Driven Engineering}}
+	\newcommand{\Float}{\textsf{Float}}
+	\newcommand{\Boolean}{\textsf{Boolean}}
+	\newcommand{\Integer}{\textsf{Integer}}
+	\newcommand{\String}{\textsf{String}}
+	\newcommand{\Himesis}{\textsf{Himesis}}
+	\newcommand{\mmhfsm}{\textsf{MM}$_{\texttt{HFSM}}$}
+	\newcommand{\mhfsm}{\textsf{m}$_{\texttt{HFSM}}$}
+	\newcommand{\mhfsmc}{\textsf{m}$_{\texttt{HFSMConcrete}}$}
+	\newcommand{\mmemof}{\textsf{MM}$_{\texttt{EMOF}}$}
+	\newcommand{\mmtrace}{\textsf{MM}$_{\texttt{Trace}}$}
+	\newcommand{\mexecution}{\textsf{m}$_{\texttt{Execution}}$}
+	\newcommand{\mmgg}{\textsf{MM}$_{\texttt{GG}}$}
+	\newcommand{\mConcrete}{K(\textsf{m}$_{\texttt{HFSMConcrete}}$)}
+	\newcommand{\mtrace}{\textsf{m}$_{\texttt{Trace}}$}
+	\newcommand{\mmggrule}{\textsf{MM\_2\_GG\_RuleGenerator}}
+	\newcommand{\ASG}{\textsf{ASG}}
+	\newcommand{\State}{\textsf{State}}
+	\newcommand{\textSC}{\textsf{Statechart}}
+	\newcommand{\Matches}{\textsf{Matches}}
+	\newcommand{\textERD}{\textsf{Entity-relationship Diagram}}
+	\newcommand{\textCD}{\textsf{Class Diagram}}
+	\newcommand{\CD}{\textsf{CD}}
+	\newcommand{\eclipse}{\textsf{ECLiPSe}}
+	\newcommand{\prolog}{\textsf{{\Prolog}}}
+	\newcommand{\classTransition}{\textbf{Transition}}
+	\newcommand{\classState}{\textbf{State}}
+	\newcommand{\classAbstractState}{\textbf{AbstractState}}
+	\newcommand{\classHFSM}{\textbf{HFSM}}
+	\newcommand{\classComposite}{\textbf{Composite}}
+	\newcommand{\textCLP}{\textsf{Constraint Logic Programming}}
+	\newcommand{\CLP}{\textsf{CLP}}
+	\newcommand{\XML}{\textsf{XML}}
+	\newcommand{\textXML}{\textsf{EXtended Markup Language}}
+	\newcommand{\XMI}{\textsf{XMI}}
+	\newcommand{\textXMI}{\textsf{XML Metadata Interchange}}
+	\newcommand{\textRDBMS}{\textsf{Relational Database Management Systems}}
+	\newcommand{\RDBMS}{\textsf{RDBMS}}
+	\newcommand{\transfo}{\textsf{class2rdbms}}
+	\newcommand{\ecore}{\textsf{Ecore}}
+	\newcommand{\Class}{\textsf{Class}}
+	\newcommand{\Attribute}{\textsf{Attribute}}
+	\newcommand{\PrimitiveDataType}{\textsf{PrimitiveDataType}}
+	\newcommand{\Association}{\textsf{Association}}
+	\newcommand{\Property}{\textsf{Property}}
+	\newcommand{\Model}{\textsf{Model}}
+	\newcommand{\ClassModel}{\textsf{ClassModel}}
+	\newcommand{\Classifier}{\textsf{Classifier}}
+
+
+	\newcommand{\AllRanges}{\textsf{AllRanges}}
+	\newcommand{\AllPartitions}{\textsf{AllPartitions}}
+	\newcommand{\Unguided}{\textsf{Unguided}}
+
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+
+\def\Kermeta{Kermeta}
+\def\Eclipse{\nm@product{Eclipse}}
+\def\Ecore{\nm@product{Ecore}}
+\def\Java{Java}
+\def\UML{\nm@product{Uml}}
+\def\Alloy{\nm@product{Alloy}}
+\def\Cartier{\nm@product{Cartier}}
+\def\Pramana{\nm@product{Pramana}}
+
+
+
+\lstdefinestyle{numbers} {numbers=left, stepnumber=1, numberstyle=\tiny, numbersep=8pt}
+
+\lstdefinestyle{nonumbers} {numbers=none}

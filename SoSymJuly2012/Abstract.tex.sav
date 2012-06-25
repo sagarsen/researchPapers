@@ -1,0 +1,25 @@
+\begin{abstract}
+
+A mass of model-based transformations for solving domain-specific problems are available but these transformations are written towards a given meta-model. However, if using these transformations when dealing with other models. How to make interoperable these transformations ? A first approach  
+
+
+Nowadays, efficient reverse-engineering tools allow developers to obtain accurate and precise models of large-scale applications such as Java open-source programs, thus facilitating their analysis and manipulation. Moreover, there exist numerous model-based tools for performing domain-specific transformations, generally conform to UML. However, applying these transformations to those program models is not straightforward and often ad-hoc because these models and transformations are conform to different meta-models. It is thus difficult to create automated software tool chains of model-based  transformations. In this paper, we propose an approach that addresses the problem of model-based interoperability among transformations and models that use different meta-models. We illustrate our approach with models of Java open-source programs and common transformations in object-oriented development, namely refactorings. We show that model transformations conform to UML can be readily reused not only on UML models but also on other models such as Java models, corresponding to real large-scale applications. 
+Our approach relies on three mechanisms: (1) an adaptation based mainly on the weaving of aspects; (2) the notion of model typing, an extension of object typing in the model-oriented context; and (3) a flexible meta-model pruning technique.
+
+%We validate our approach on open-source projects.
+
+
+%Ingredients needed to create highly automated software supply chains and systems that minimize the effort to integrate new suppliers of model based software artifacts are :
+%- static analysis of transformations
+%- meta-model pruning
+%- model typing
+%- adaptation
+
+%Therefore, any program written for the effective meta-model will also accept models of the large meta-model.
+
+
+%In the future, we would like to integrate the meta-model pruning algorithm to dynamically generate an effective meta-model in MDE tool chains such as editors and transformations. There is also scope
+%for adding more options to control the generation of an effective meta-model for various objectives.
+
+
+\end{abstract}

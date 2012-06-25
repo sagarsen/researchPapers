@@ -1,0 +1,104 @@
+%%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a template file for the global option of the SVJour class
+%
+% Copy it to a new file with a new name and use it as the basis
+% for your article
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% First comes an example EPS file -- just ignore it and
+% proceed on the \documentclass line
+\begin{filecontents*}{example.eps}
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox: 19 19 221 221
+%%CreationDate: Mon Sep 29 1997
+%%Creator: programmed by hand (JK)
+%%EndComments
+gsave
+newpath
+  20 20 moveto
+  20 220 lineto
+  220 220 lineto
+  220 20 lineto
+closepath
+2 setlinewidth
+gsave
+  .4 setgray fill
+grestore
+stroke
+grestore
+\end{filecontents*}
+%
+% Choose either the first of the next two \documentclass lines for one
+% column journals or the second for two column journals.
+%\documentclass[global,referee]{svjour}
+\documentclass[global,twocolumn,referee]{svjour}
+% Remove option referee for final version
+
+
+\usepackage{graphics}
+
+
+% Insert the name of "your" journal with the command below:
+\journalname{Software and System Modeling}
+
+\begin{document}
+
+\title{Towards Domain Independence in Tool Chains of Model Transformations}
+%\subtitle{Do you have a subtitle?\\ If so, write it here}
+
+
+\author{Sagar Sen \and Naouel Moha \and Benoit Baudry  \and Jean-Marc J\'{e}z\'{e}quel
+% \thanks{\emph{Present address:} Insert the address here if needed}%
+}
+
+%
+%\offprints{}          % Insert a name or remove this line
+%
+
+\institute{
+    INRIA Rennes - Bretagne Atlantique / IRISA, Universit\'{e} Rennes 1\\[1mm]
+    Triskell Team, Campus de Beaulieu, 35042 Rennes Cedex, France\\
+    \email{\{ssen, moha, bbaudry, jezequel\}@irisa.fr}
+}
+
+
+\date{Received: date / Revised version: date}
+% The correct dates will be entered by the editor
+%
+\maketitle
+%
+
+\input{Abstract.tex}
+\input{Introduction.tex}
+\input{Motivation.tex}
+\input{RelatedWork.tex}
+\input{Approach.tex}
+\input{Experiments.tex}
+\input{Conclusion.tex}
+
+%
+% BibTeX users please use
+% \bibliographystyle{}
+% \bibliography{}
+%
+% Non-BibTeX users please use
+\begin{thebibliography}{}
+%
+% and use \bibitem to create references.
+%
+\bibitem{RefJ}
+% Format for Journal Reference
+Author, Journal \textbf{Volume,} (year) page numbers.
+% Format for books
+\bibitem{RefB}
+Author, \textit{Book title} (Publisher, place year) page numbers
+% etc
+\end{thebibliography}
+
+
+\end{document}
+
+% end of file template.tex
+

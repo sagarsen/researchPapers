@@ -1,0 +1,40 @@
+%% $Id: lstlang0.sty,v 1.1 2009-02-05 14:06:43 mclavreu Exp $
+%% Project : fr.irisa.triskell.kermeta.documentation
+%% File :   lstlang0.sty
+%% Copyright : IRISA / INRIA / Universite de Rennes 1
+%% ----------------------------------------------------------------------------
+%% Creation date : 05 fevrier 2009
+%% Authors : bmorin, mclavreu
+%%
+%%
+\ProvidesFile{lstAlloy.sty}
+    [2009/02/05 0.1 listings language file]
+
+%% Alloy Language
+\definecolor{KRed}{rgb}{0.59,0,0}
+\definecolor{KBlue}{rgb}{0,0,0.59}
+\definecolor{KBlack}{rgb}{0,0,0}
+\definecolor{KGreen}{rgb}{0,0.59,0}
+\definecolor{KPurple}{rgb}{0.5,0,0.47}
+\definecolor{KOliveGreen}{cmyk}{0.64,0,0.95,0.40}
+
+\lstdefinelanguage{alloy} { morekeywords=[0]{ some, all,
+and, or, \#, one,lone, set, seq, in, implies,for, int, forAll,self }, morekeywords=[1]{ pred, fact, sig, run, context, inv },
+sensitive=true, morecomment=[l]{//}, morecomment=[s]{/*}{*/},
+morestring=[b], }
+
+\lstset{language=alloy,
+   basicstyle=\ttfamily,
+   keywordstyle=[0]\bf\color{KRed},
+   keywordstyle=[1]\bf\color{KBlue},
+   commentstyle=\color{KOliveGreen},
+   tabsize=2,
+   breaklines=true,
+%   frame=single,
+%   backgroundcolor=\color{Gris}
+}
+
+
+\endinput
+
+%% End of file `lstlang0.sty'.

@@ -1,0 +1,225 @@
+\section{Foundations}
+\label{sec:Foundation}
+
+
+This section presents foundational ideas used by the methodology for automatic test model generation and empirical evaluation presented in Section \ref{sec:Methodology}.  First, we present the modelling and model transformation language {\Kermeta} in Section \ref{sec:sec:Kermeta}. We use {\Kermeta} to implement all model transformations in the paper. We briefly describe {\Pramana} for automatic test model generation in Section \ref{sec:sec:transfo2Alloy}. Effective test model generation in this paper is guided by coverage criteria based testing strategies. These testing strategies are described in Section \ref{sec:sec:testStrategy}. Finally, the bug detecting effectiveness of  test models generated using different testing strategies is
+done by mutation analysis. Mutation analysis for model transformations is described in Section \ref{sec:sec:ma}.
+
+\subsection{Kermeta}
+\label{sec:sec:Kermeta}
+
+\Kermeta{} is a language for specifying metamodels, models, and model transformations that are compliant to the Meta Object Facility (MOF) standard \cite{MOF2}. The object-oriented meta-language MOF supports the definition of metamodels in terms of object-oriented structures (packages, classes, properties, and operations). It also provides model-specific constructions such as containments and associations between classes. \Kermeta{} extends the MOF with an \emph{imperative action language} for specifying constraints and operational semantics for metamodels \cite{Muller05a}. \Kermeta{} is built on top of EMF within the \Eclipse{} development environment. The action language of \Kermeta{} provides mechanisms for dynamic binding, reflection, and exception handling. It also includes classical control structures such as blocks, conditionals, and loops.
+
+
+\subsection{{\Pramana}: A Tool for Automatic Model Generation}
+\label{sec:sec:transfo2Alloy}
+
+We use the tool {\Pramana} previously introduced (with the name {\Cartier}) in our paper \cite{sen2008} to automatically generate test models. {\Pramana} transforms the input domain specification of a model transformation to a common constraint language {\Alloy}. Solving the {\Alloy} model gives zero or more models in the input domain of a transformation. {\Pramana} first transforms a model transformation's  input metamodel expressed in the Eclipse Modelling Framework \cite{emf2004} format called Ecore using the transformation rules presented in \cite{sen2008} to {\Alloy}. Basically, classes in the input metamodel are transformed to {\Alloy} signatures and implicit constraints such as inheritance, opposite properties, and multiplicity constraints are transformed to {\Alloy} facts. 
+
+Second, {\Pramana} also addresses the issue of transforming invariants and pre-conditions on metamodels expressed in the industry standard {\textOCL} ({\OCL}) to {\Alloy}. The automatic transformation of  {\OCL} to {\Alloy} presents a number of challenges that are discussed in \cite{AnastasakisBGR07}. We do not claim that all {\OCL} constraints can be manually/automatically transformed to {\Alloy} for our approach to be applicable in the most general case. The reason being that {\OCL} and {\Alloy} were designed with different goals. {\OCL} is used mainly to query a model and check if certain invariants are satisfied. {\Alloy} facts and predicates on the other hand enforce constraints on a model. This is in contrast with the side-effect free {\OCL}. The core of {\Alloy} is declarative and is based on first-order relational logic with quantifiers while {\OCL} includes higher-order logic and has imperative constructs to call operations and messages making some parts of {\OCL} more expressive. In our case study, we have been successful in transforming all meta-constraints on the {\UMLCD} metamodel to {\Alloy} from their original {\OCL} specifications. Nevertheless, we are aware of {\OCL}'s status as a current industrial standard and thus provide an automatic mapping to complement our approach.
+
+
+Previous work exists in mapping {\OCL} to {\Alloy}. The tool UML2Alloy \cite{anastasakis2009} takes as input {\UML} class models with {\OCL} constraints. The authors present a set of mappings between {\OCL} collection operations and their {\Alloy} equivalents. Here we present our version of such transformation derived from \cite{anastasakis2009} and written in  {\Kermeta}.
+
+The context of an {\OCL} constraint (which is what defines the value of the \emph{self} constraint) determines the place of the constraint within the generated {\Alloy} model. It is added as an appended fact. The mappings in Table \ref{table:ocl2alloy} (taken in part from \cite{anastasakis2009}) show the automatic transformation rules applied in {\Pramana}.
+
+\begin{table} [!b]
+%% increase table row spacing, adjust to taste
+\renewcommand{\arraystretch}{1}
+\renewcommand{\arrayrulewidth}{1 pt}
+\caption{Mappings from {\OCL} to {\Alloy}}
+\label{table:ocl2alloy}
+%\centering   
+\begin{tabular}{p {8cm}}
+Let \emph{v} be a variable,
+\emph{col} a collection,
+\emph{expr} an expression,
+\emph{be} an expression that returns a boolean value,
+\emph{o} an expression that returns an object,
+\emph{T} a type,              
+\emph{propertyCallExpr} an expression invoking a property on an object
+\end{tabular}
+\begin{tabular}{p {4 cm} p {4 cm}}
+\hline
+\textbf{ {\OCL} Expression Type} & \textbf{{\Alloy} Abstract Syntax Type }\\
+\hline
+$context\ T\ inv\ expr$ & $sig\ T \{{\ldots}\}\{expr\}$ \\
+$col \to forAll(v : T \mid be)$ & $all\ v : T \mid be$ \\
+$col \to forAll(v : col \mid be)$ & $all\ v : col \mid be$ \\
+$expr1 and expr2$ & $expr1\ \&\&\ expr2$ \\
+$expr1 or expr2$ & $expr1 \mid\mid expr2$ \\
+$not\ be$ & $!be$ \\
+$col \to size()$ & $\#col$ \\
+$col \to includes(o : T)$ & $o\ in\ col$ \\
+$col \to excludes(o : T)$ & $o\ !in\ col$ \\
+$col1 \to includesAll(col2)$ & $col2\ in\ col1$ \\
+$col1 \to excludesAll(col2)$ & $col2\ !in\ col1$ \\
+$col \to including(o : T)$ & $col\ +\ o$ \\
+$col \to excluding(o : T)$ & $col\ -\ o$ \\
+$col \to isEmpty()$ & $no\ col$ \\
+$col \to notEmpty()$ & $some\ col$ \\
+$expr.propertyCallExpr$ & $expr.propertyCallExpr$ \\
+$if\ be\ then\ expr1\ else\ expr2$ & $be \Rightarrow expr1\ else\ expr2$ \\
+$expr.oclIsUndefined$ & $\#expr = 0$ \\
+$expr \to oclIsKindOf(o : T)$ & $expr\ in\ o$ \\
+$col1 \to union(col2)$ & $col1 + col2$ \\
+$col1 \to intersection(col2)$ & $col1\ \&\ col2$ \\
+$col1 \to product(col2)$ & $col1 \to col2$ \\
+$col \to sum()$ & $sum\ col$ \\
+$col1 \to symmetricDifference(col2)$ & $(col1 + col2) - (col1 \& col2)$\\
+$col \to select(be)$ & $v : col \mid be $\\
+$col \to isUnique(propertyCallExpr)$ & $no\ disj\ v1,\ v2 : col \mid
+v1.propertyCallExpr = v2.propertyCallExpr$ \\
+\hline
+\end{tabular}
+
+\end{table}
+
+
+
+However, some classes of {\OCL} invariants cannot be automatically transformed to {\Alloy} using the simple rules in Table \ref{table:ocl2alloy}. For example, consider the invariant for no cyclic inheritance in Figure \ref{fig:umlcd}(b) \cite{baar2003}. The constraint is specified as the fact in Listing \ref{listing:alloyfact}. This is an example in which the richness of the {\Alloy} language overcomes {\OCL} - it is not possible to specify this constraint in {\OCL} without using recursive queries since there is no transitive closure operator.
+
+
+\lstinputlisting[language=Alloy, basicstyle=\tiny,
+style=nonumbers, frame=single, framerule=0.2pt, captionpos=b,
+caption={{\Alloy} Fact for No Cyclic Inheritance}, label={listing:alloyfact}]{./listings/exampleOCLAlloyFact.tex}
+
+
+The generated {\Alloy} model for the {\UMLCD} metamodel using {\Pramana} is given in Appendix \ref{appendix:mainmodel}. This {\Alloy} model describes the  input domain of the transformation. 
+
+\subsection{Test Selection Strategies}
+\label{sec:sec:testStrategy}
+
+Effective strategies to guide automatic model generation are required to select test models that detect bugs in a model transformation. We define a strategy as a process that generates \emph{{\Alloy} predicates} which are constraints added to the {\Alloy} model synthesized by {\Pramana} as described in Section \ref{sec:Methodology}. This combined {\Alloy} model is solved and the solutions are transformed to model instances of the input metamodel that satisfy the predicate. We present the following strategies to guide model generation:
+
+\begin{itemize}
+	\item \textbf{Random/Unguided Strategy:} The basic form of model generation is unguided where only the {\Alloy} model obtained from the metamodel and transformation is used to generate models. No extra knowledge is supplied to the solver in order to generate models. The strategy yields an empty {\Alloy} predicate as shown in Listing \ref{listing:emptypred}.
+	
+	\lstinputlisting[language=Alloy, basicstyle=\tiny,
+style=nonumbers, frame=single, framerule=0.2pt, captionpos=b,
+caption={Empty {\Alloy} Predicate }, label={listing:emptypred}]{./listings/emptyAlloyPredicate.tex}
+
+
+	\item \textbf{Input-domain Partition based Strategies:}
+		We guide generation of models using test criteria to combine \emph{partitions} on domains of all properties of a metamodel (cardinality of references or domain of primitive types for attributes).  A \emph{partition} of a set of elements is a collection of $n$ ranges $A_1$,..., $A_n$ such that $A_1$, ..., $A_n$  do not overlap and the union of all subsets forms the initial set. These subsets are called \emph{ranges}. We use partitions of the input domain since the number of models in the domain are infinitely many. Using partitions of the properties of a metamodel we define two coverage criteria that are based on different strategies for combining partitions of properties. Each criterion defines a set of \emph{model fragments} for an input metamodel. These fragments are transformed to predicates on metamodel properties by {\Pramana}. For a set of test models to cover the input domain  at least one model in the set must cover each of these model fragments. We generate model fragment predicates using the following coverage criteria to combine partitions (cartesian product of partitions):
+		\begin{itemize}
+			\item \textbf{AllRanges Criteria:} {\AllRanges} specifies that each range in the partition of each property must be covered by at least one test model.
+			\item \textbf{AllPartitions Criteria:} {\AllPartitions} specifies that the whole partition of each property must be covered by at least one test model.
+		\end{itemize}
+
+\end{itemize}
+
+The notion of coverage criteria to generate model fragments was initially proposed in our paper \cite{franck2007}. The accompanying tool called Meta-model Coverage Checker (MMCC) \cite{franck2007} generates model fragments using different test criteria taking any metamodel as input. Then, the tool automatically computes the coverage of a set of test models according to the generated model fragments. If some fragments are not covered, then the set of test models should be improved in order to reach a better coverage. 
+
+In this paper, we use the model fragments generated by MMCC for the {\UMLCD}  {\ecore} model (Figure \ref{fig:umlcd}). We use the criteria {\AllRanges} and {\AllPartitions}.   For example, in Table \ref{table:modelFrags}, \emph{mfAllRanges1} and \emph{mfAllRanges2} are model fragments generated by {\Pramana} using MMCC \cite{franck2007} for the \emph{name} property of a classifier object. The \emph{mfAllRanges1} states that there must be at least one classifier object with an empty name while \emph{mfAllRanges2} states that there must be at least one classifier object with a non-empty name. These values for name are the ranges for the property. The model fragments chosen using {\AllRanges} \emph{mfAllRanges1} and \emph{mfAllRanges2} define two partitions \emph{partition1} and \emph{partition2}. The model fragment  \emph{mfAllPartitions1} chosen using {\AllPartitions} defines both \emph{partition1} and \emph{partition2}.
+
+\begin{table} [!b]
+%% increase table row spacing, adjust to taste
+\renewcommand{\arraystretch}{1}
+\renewcommand{\arrayrulewidth}{1 pt}
+\caption{Consistent Model Fragments Generated using {\AllRanges} and {\AllPartitions} Strategies}
+\label{table:modelFrags}
+%\centering
+\begin{tabular}{p {2.5 cm} p {5.5 cm}}
+\hline
+\textbf{Model-Fragment} & \textbf{ Description} \\ \hline 
+ mfAllRanges1 &  A {\Classifier}  $c \mid c.name=$``''\\%\begin{verbatim} some c:Classifier|c.name>=0 \end{verbatim}\\    
+ mfAllRanges2 &  A {\Classifier}  $c \mid c.name!=$``''\\%\begin{verbatim} some c:Classifier|c.name>=0 \end{verbatim}\\   
+ mfAllRanges3 & A {\Class}  $c \mid c.is\_persistent=True$ \\%\begin{verbatim}some c:Class |c.is_persistent=True\end{verbatim} \\
+ mfAllRanges4 & A {\Class}  $c \mid c.is\_persistent=False$ \\%\begin{verbatim}some c:Class |c.is_persistent=False\end{verbatim} \\
+ mfAllRanges5 & A {\Class}  $c \mid \#c.parent = 0$\\ %\begin{verbatim}some c:Class|#c.parent=0 \end{verbatim} \\
+ mfAllRanges6 & A {\Class}  $c \mid \#c.parent = 1$\\ %\begin{verbatim}some c:Class|#c.parent=0 \end{verbatim} \\
+ mfAllRanges7 & A {\Class}  $c \mid \#c.attrs=1$\\ %\begin{verbatim}some c:Class|#c.attrs=1\end{verbatim} \\
+ mfAllRanges8 & A {\Class}  $c \mid \#c.attrs > 1$\\ %\begin{verbatim}some c:Class|#c.attrs>1\end{verbatim} \\
+ mfAllRanges9 & An {\Attribute}  $a \mid a.is\_primary=True$\\ %\begin{verbatim}some a:Attribute|a.is_primary=True \end{verbatim}\\
+ mfAllRanges10 & An {\Attribute}  $a \mid a.name=$``''\\% \begin{verbatim}some a:Attribute|a.name=0 \end{verbatim}\\
+ mfAllRanges11 & An {\Attribute}  $a \mid a.name!=$``''\\%\begin{verbatim}some a:Attribute|a.name!=0 \end{verbatim}\\    
+ mfAllRanges12 & An {\Attribute}  $a \mid \#a.type=1$\\ %\begin{verbatim}some a:Attribute|#a.type=1 \end{verbatim}\\
+ mfAllRanges13 & An {\Association}  $as \mid as.name=$``''\\%\begin{verbatim}some a:Association|a.name=0  \end{verbatim}\\
+ mfAllRanges14 & An {\Association}  $as \mid \#as.src=1$\\ %\begin{verbatim}some a:Association|#a.dest=1 \end{verbatim}  \\
+ mfAllRanges15 & An {\Association}  $as \mid \#as.dest=1$\\ %\begin{verbatim}some a:Association|#a.dest=1 \end{verbatim} \\
+ mfAllPartitions1 & {\Classifier}s  $c1,c2 \mid c1.name=$``'' and $c2.name!=$``'' \\ %\begin{verbatim}some c:Classifier|c.name=0 and some c:Classifier|c.name>=0\end{verbatim}\\
+ mfAllPartitions2 & {\Class}es  $c1,c2 \mid c1.is\_persistent=True$ and $c2.is\_persistent=False $  \\ %\begin{verbatim}some c:Class |c.is_persistent=True and some c:Class |c.is_persistent=False\end{verbatim} \\
+ mfAllPartitions3 & {\Class}es  $c1,c2 \mid \#c1.parent=0$ and $\#c2.parent=1$ \\ %\begin{verbatim}some c:Class|#c.parent=0 and some c:Class|#c.parent=1\end{verbatim} \\
+ mfAllPartitions4 & {\Property}s $a1,a2 \mid a1.is\_primary=True$ and $a2.is\_primary=False$ \\ %\begin{verbatim}some a:Attribute|a.is_primary=True and some a:Attribute|a.is_primary=False and some a:Attribute|a.name=0 \end{verbatim}\\
+ mfAllPartitions5 & {\Association}s $as1,as2 \mid as1.name=$``'' and $as2.name!=$``'' \\ %\begin{verbatim}some a:Association|a.name=0  and some a:Association|a.name!=0\end{verbatim} \\
+\hline 
+\end{tabular} 
+
+\end{table}
+
+These model fragments are transformed to {\Alloy} predicates by {\Pramana}. For instance, model fragment \emph{mfAllRanges7} is transformed to the predicate in Listing \ref{listing:mfpred}.
+
+\lstinputlisting[language=Alloy, basicstyle=\tiny,
+style=nonumbers, frame=single, framerule=0.2pt, captionpos=b,
+caption={{\Alloy} Predicate for \emph{mfAllRanges7} }, label={listing:mfpred}]{./listings/exampleAlloyPredicate.tex}
+	
+	As mentioned in our previous paper \cite{franck2007} if a test set contains models where all model fragments are contained in at least one model then we say that the input domain is completely covered. However, these model fragments are generated considering only the concepts and relationships in the {\ecore} model and they do not take into account the constraints on the {\ecore} model. Therefore, not all model fragments are consistent with the input metamodel because the generated models that contain these model fragments do not satisfy the constraints on the metamodel. {\Pramana} invokes the {\Alloy} Analyzer \cite{alloy} to automatically check if a model containing a model fragment and satisfying the input domain can be synthesized for a general scope of number of objects. This allows us to \emph{detect inconsistent model fragments}. For example, the following predicate, \emph{mfAllRanges7a}, is the {\Alloy} representation of a model fragment specifying that some {\Class} object does not have any {\Property} object. {\Pramana} calls the {\Alloy} API to execute the run statement for the predicate \emph{mfAllRanges7a} along with the base {\Alloy} model to create a model that contains up to 30 objects per class/concept/signature (see Listing \ref{listing:mfpredrun}).
+	
+	
+\lstinputlisting[language=Alloy, basicstyle=\tiny,
+style=nonumbers, frame=single, framerule=0.2pt, captionpos=b,
+caption={{\Alloy} Predicate and Run Command }, label={listing:mfpredrun}]{./listings/exampleAlloyPredicateRun.tex}
+	
+
+The {\Alloy} analyzer yields a \emph{no solution} to the run statement indicating that the model fragment is not consistent with the input domain specification. This is because no model can be created with this model fragment that also satisfies an input domain constraint that states that every {\Class} must have at least one {\Property} object as shown in Listing \ref{listing:alloysig}.
+
+\lstinputlisting[language=Alloy, basicstyle=\tiny,
+style=nonumbers, frame=single, framerule=0.2pt, captionpos=b,
+caption={Example {\Alloy} Signature}, label={listing:alloysig}]{./listings/exampleAlloySig.tex}
+	
+
+In Listing \ref{listing:alloysig},  \emph{some} indicates 1..*.  However, if a model solution can be found using {\Alloy} we call it a \emph{consistent model fragment}. MMCC generates a total of 15 consistent model fragments using {\AllRanges} and 5 model fragments using the {\AllPartitions} strategy, as shown in Table \ref{table:modelFrags}.
+
+
+\subsection{Qualifying Models: Mutation Analysis for Model Transformation Testing}
+\label{sec:sec:ma}
+
+We generate sets of test models using different strategies and qualify these sets via mutation analysis \cite{demillo1978}. Mutation analysis involves creating a set of faulty versions or \emph{mutants} of a program. A test set must distinguish the program output from all the output of its mutants. In practice, faults are modelled as a set of mutation operators where each operator represents a class of faults. A mutation operator is applied to the program under test to create each mutant. A mutant is killed when at least one test model detects the pre-injected fault. It is detected when program output and mutant output are different. A test set is relatively adequate if it kills all mutants of the original program.  A mutation score is associated to the test set to measure its effectiveness in terms of percentage of the killed/revealed mutants.
+
+We use the mutation analysis operators for model transformations presented in our previous work \cite{mottu2006}. These mutation operators are based on three abstract operations linked to the basic treatments in a model transformation: the navigation of the models through the relations between the classes, the filtering of collections of objects, the creation and the modification of the elements of the output model. Using this basis we define several mutation operators that inject faults in model transformations:
+
+\textbf{Relation to the same class change (RSCC): }The navigation of one association toward a class is replaced with the navigation of another association to the same class.
+
+\textbf{Relation to another class change (ROCC): }The navigation of an association toward a class is replaced with the navigation of another association to another class.
+
+\textbf{Relation sequence modification with deletion (RSMD): }This operator removes the last step off from a navigation which successively navigates several relations.
+
+\textbf{Relation sequence modification with addition (RSMA): }This operator does the opposite of RSMD, adding the navigation of a relation to an existing navigation.
+
+\textbf{Collection filtering change with perturbation (CFCP): }The filtering criterion, which could be on a property or the type of the classes filtered, is disturbed.
+
+\textbf{Collection filtering change with deletion (CFCD): }This operator deletes a filter on a collection; the mutant operation returns the collection it was supposed to filter.
+
+\textbf{Collection filtering change with addition (CFCA): }This operator does the opposite of CFCD. It uses a collection and processes an additional filtering on it.
+
+\textbf{Class compatible creation replacement (CCCR): }The creation of an object is replaced by the creation of an instance of another class of the same inheritance tree.
+
+\textbf{Classes association creation deletion (CACD): }This operator deletes the creation of an association between two instances.
+
+\textbf{Classes association creation addition (CACA): }This operator adds a useless creation of a relation between two instances.
+
+Using these operators, we produced two hundred mutants from the {\transfo} model transformation with the repartition indicated in Table \ref{table:mutation}.
+%\begin{table*} [!t]
+\begin{table*} 
+\renewcommand{\arraystretch}{1}
+\renewcommand{\arrayrulewidth}{1 pt}
+\caption{Repartition of the {\transfo} mutants depending on the mutation
+operator applied}
+\label{table:mutation}
+\centering
+\begin{tabular}{l l  l l l l l l l l l}
+\hline
+\textbf{Mutation Operator} & CFCA & CFCD& CFCP
+&CACD&CACA&RSMA&RSMD&ROCC&RSCC&Total \\ \hline 
+\textbf{Number of Mutants}& 19&18&38&11&9&72&12&12&9&200\\ \hline
+\end{tabular} 
+\end{table*}
+
+In general, not all mutants injected become faults as some of them are equivalent and can never be detected. The controlled experiments presented in this paper uses mutants presented in our previous work \cite{mottu2006}. We have clearly identified faults and equivalent mutants to study the effect of our generated test models.
+
+
+
+
+
+

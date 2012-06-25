@@ -1,0 +1,101 @@
+
+module tmp/UMLCD
+open util/boolean as Bool
+
+sig Model
+{
+	classifier : set Classifier,
+	association:set Association
+}
+
+
+abstract sig Classifier
+{
+	name :  Int
+}
+
+sig PrimitiveDataType extends Classifier 
+{ }
+
+sig Class extends Classifier
+{
+	is_persistent: one Bool,
+	parent : lone Class,
+	attrs : some Attribute
+
+}
+
+sig Association
+
+{
+	name: Int,
+	dest: one Class,
+	src: one Class
+
+}
+
+sig Attribute
+{
+	name: Int,
+	is_primary : Bool,
+	type: one Classifier
+}
+
+//Meta-model constraints
+
+/* There must be No Cyclic Inheritance in an UMLCD*/
+
+fact noCyclicInheritance 
+{
+	no c: Class | c in c.^parent
+}
+
+/* All the attributes in a Class must have unique attribute names */
+
+fact uniqueAttributeNames 
+{
+	all c:Class | all a1:  c.attrs, a2: c.attrs | a1.name = a2.name implies a1=a2
+}
+
+/* An attribute object can be contained by only one class */
+
+fact attributeContainment 
+{
+	all c1:Class, c2:Class | all a1: c1.attrs , a2 : c2.attrs | a1 = a2 implies c1=c2
+}
+
+/* There is exactly one Model object */
+
+fact oneModel 
+{
+	#Model=1
+}
+
+/*All Classifier objects are contained in a Model*/
+
+fact classifierContainment 
+{
+	all c:Classifier | c in Model.classifier
+}
+
+/*All Association objects are contained in a Model */
+
+fact associationContainment 
+{
+all a:Association| a in Model.association
+}
+
+/*A Classifier must have a unique name in the Class Diagram*/
+
+fact uniqueClassifierName 
+{
+	all c1:Classifier, c2:Classifier |c1.name = c2.name implies c1=c2
+}
+
+/*An associations have the same name either they are the same association or they have different sources*/
+
+fact uniqeNameAssocSrc 
+{
+	all a1:Association, a2:Association |
+	a1.name = a2.name implies (a1 = a2 or a1.src != a2.src)
+}

@@ -1,0 +1,26 @@
+\begin{abstract}
+In a previous paper, we showed that ....
+
+Therefore, any program written for the effective meta-model
+will also accept models of the large meta-model.
+
+
+In the future, we would like to integrate the meta-model
+pruning algorithm to dynamically generate an effective
+meta-model in MDE tool chains such as editors and
+transformations. There is also scope for adding more options to
+control the generation of an effective meta-model for various
+objectives.
+
+
+
+
+Tool chain : different transformations (T1: Reverse engineering
++ T2: Refactorings)
+
+Refactorings are written in a subset of UML could be applied on
+any models that represent a program, UML models or Java program
+models.
+
+The static analysis has to be automated
+\end{abstract}

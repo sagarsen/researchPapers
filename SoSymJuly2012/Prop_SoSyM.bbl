@@ -1,0 +1,175 @@
+\begin{thebibliography}{10}
+
+\bibitem{Baudry09a}
+Baudry, B., Ghosh, S., Fleurey, F., France, R., Le~Traon, Y., Mottu, J.M.:
+\newblock Barriers to systematic model transformation testing.
+\newblock Communications of the ACM (2009)
+
+\bibitem{bardohl99}
+Bardohl, R., Taentzer, G., M.~Minas, A.S.:
+\newblock Handbook of Graph Grammars and Computing by Graph transformation,
+  vII: Applications, Languages and Tools.
+\newblock World Scientific (1999)
+
+\bibitem{muller2005}
+Muller, P.A., Fleurey, F., Jezequel, J.M.:
+\newblock Weaving executability into object-oriented meta-languages.
+\newblock In: Inernational Conference on Model Driven Engineering Languages and
+  Systems (MoDelS/UML), Montego Bay, Jamaica, Springer (2005)  264--278
+
+\bibitem{jouault2006}
+Jouault, F., Kurtev, I.:
+\newblock {On the Architectural Alignment of ATL and QVT}.
+\newblock In: {Proceedings of ACM Symposium on Applied Computing (SAC 06)},
+  Dijon, FRA (April 2006)
+
+\bibitem{franck2007}
+Fleurey, F., Baudry, B., Muller, P.A., Traon, Y.L.:
+\newblock Towards dependable model transformations: Qualifying input test data.
+\newblock Software and Systems Modelling (Accepted) (2007)
+
+\bibitem{sen2008}
+Sen, S., Baudry, B., Mottu, J.M.:
+\newblock On combining multi-formalism knowledge to select test models for
+  model transformation testing.
+\newblock In: IEEE International Conference on Software Testing, Lillehammer,
+  Norway (April 2008)
+
+\bibitem{demillo1978}
+DeMillo, R., R.L., Sayward, F.:
+\newblock Hints on test data selection : Help for the practicing programmer.
+\newblock IEEE Computer \textbf{11}(4) (1978)  34 -- 41
+
+\bibitem{mottu2006}
+Mottu, J.M., Baudry, B., Traon, Y.L.:
+\newblock Mutation analysis testing for model transformations.
+\newblock In: Proceedings of ECMDA'06, Bilbao, Spain (July 2006)
+
+\bibitem{emf2004}
+Budinsky, F.:
+\newblock Eclipse Modeling Framework.
+\newblock The Eclipse Series. Addison-Wesley (2004)
+
+\bibitem{OCL}
+{OMG}:
+\newblock {The Object Constraint Language Specification 2.0, OMG Document:
+  ad/03-01-07} (2007)
+
+\bibitem{bezivin2005}
+Bezivin, J., Rumpe, B., Schurr, A., Tratt, L.:
+\newblock Model transformations in practice workshop, october 3rd 2005, part of
+  models 2005.
+\newblock In: Proceedings of MoDELS. (2005)
+
+\bibitem{MOF2}
+OMG:
+\newblock Mof 2.0 core specification.
+\newblock Technical Report formal/06-01-01, OMG (April 2006) OMG Available
+  Specification.
+
+\bibitem{Muller05a}
+Muller, P.A., Fleurey, F., J\'{e}z\'{e}quel, J.M.:
+\newblock Weaving executability into object-oriented meta-languages.
+\newblock In: MODELS/UML. Volume 3713., Montego Bay, Jamaica, Springer (October
+  2005)  264--278
+
+\bibitem{AnastasakisBGR07}
+Anastasakis, K., Bordbar, B., Georg, G., Ray, I.:
+\newblock Uml2alloy: A challenging model transformation.
+\newblock In: MoDELS. (2007)  436--450
+
+\bibitem{anastasakis2009}
+Anastasakis, K., Bordbar, B., Georg, G., Ray, I.:
+\newblock On challenges of model transformation from uml to alloy.
+\newblock In: Software and Systems Modeling. Volume~9. (December 2009)  69--86
+
+\bibitem{baar2003}
+Baar, T.:
+\newblock The definition of transitive closure with ocl-limitations and
+  applications.
+\newblock In: Proceedings of Fifth Andrei Ershov International Conference,
+  Perspectives, of System Informatics, Springer (2003)  358--365
+
+\bibitem{alloy}
+Jackson, D.:
+\newblock http://alloy.mit.edu.
+\newblock (2008)
+
+\bibitem{glitia2008}
+Glitia, F., Etien, A., Dumoulin., C.:
+\newblock Traceability for an mde approach of embedded system conception. in ,.
+\newblock In: Fourth ECMDA Tracibility Workshop, Berlin, Germany (June 2008)
+
+\bibitem{shari2005}
+Pfleeger, S.L.:
+\newblock Experimental design and analysis in software engineering.
+\newblock Annals of Software Engineering (2005)  219--253
+
+\bibitem{mottu2008}
+Mottu, J.M., Baudry, B., Traon, Y.L.:
+\newblock Model transformation testing: Oracle issue.
+\newblock In: In Proc. of MoDeVVa workshop colocated with ICST 2008,
+  Lillehammer, Norway (April 2008)
+
+\bibitem{vagoun1996}
+Vagoun, T.:
+\newblock Input domain partitioning in software testing.
+\newblock In: HICSS '96: Proceedings of the 29th Hawaii International
+  Conference on System Sciences (HICSS) Volume 2: Decision Support and
+  Knowledge-Based Systems, Washington, DC, USA (1996)
+
+\bibitem{elaine1991}
+Weyuker, E.J., Weiss, S.N., Hamlet, D.:
+\newblock Comparison of program testing strategies.
+\newblock In: TAV4: Proceedings of the symposium on Testing, analysis, and
+  verification, New York, NY, USA, ACM (1991)  1--10
+
+\bibitem{Gutjahr99partitiontesting}
+Gutjahr, W.J.:
+\newblock Partition testing versus random testing: the influence of
+  uncertainty.
+\newblock IEEE TSE \textbf{25} (1999)  661--674
+
+\bibitem{chandra2002}
+Boyapati, C., Khurshid, S., Marinov, D.:
+\newblock Korat: automated testing based on java predicates.
+\newblock In: Proceedings of the 2002 ACM SIGSOFT international symposium on
+  Software testing and analysis. (2002)
+
+\bibitem{hen2005}
+M, H., Power, J.:
+\newblock An analysis of rule coverage as a criterion in generating minimal
+  test suites for grammar-based software.
+\newblock In: Proc. of the 20th IEEE/ACM ASE, NY, USA (2005)
+
+\bibitem{brottier2006}
+Brottier, E., Fleurey, F., Steel, J., Baudry, B., Traon., Y.L.:
+\newblock Metamodel-based test generation for model transformations: an
+  algorithm and a tool.
+\newblock In: Proceedings of ISSRE'06, Raleigh, NC, USA (2006)
+
+\bibitem{ehrig2006}
+Ehrig, K., KŸster, J., Taentzer, G., Winkelmann, J.:
+\newblock Generating instance models from meta models.
+\newblock In: FMOODS'06 (Formal Methods for Open Object-Based Distributed
+  Systems), Bologna, Italy (June 2006)  156 -- 170.
+
+\bibitem{sen2007}
+Sen, S., Baudry, B., Precup, D.:
+\newblock Partial model completion in model driven engineering using constraint
+  logic programming.
+\newblock In: International Conference on the Applications of Declarative
+  Programming. (2007)
+
+\bibitem{walter1955}
+Federer, W.T.:
+\newblock Experimental Design: Theory and Applications.
+\newblock Macmillan (1955)
+
+\bibitem{sen2009b}
+Sen, S., Moha, N., Baudry, B., Jezequel, J.M.:
+\newblock Meta-model pruning.
+\newblock In: Model Driven Engineering Languages and Systems, 12th
+  International Conference (MODELS), Denver, CO, USA (October 4-9 2009)
+
+\end{thebibliography}
